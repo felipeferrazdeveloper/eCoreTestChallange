@@ -5,18 +5,35 @@ namespace CustomSelenium
 {
     public class SeleniumManager
     {
-        static IWebDriver driver;
+        private static IWebDriver Driver;
 
         static public IWebDriver GetWebDriver() {
-            if (driver == null)
-            {
-                driver = new ChromeDriver();
-                driver.Url = "https://automation-sandbox-python-mpywqjbdza-uc.a.run.app";
-            }
-            
-            return driver; 
+            if (Driver != null)
+                return Driver;
+            else
+                throw new Exception("No driver session available");
         }
 
+        public static void StartSession(String url)
+        {
+            if (Driver == null)
+            {
+                Driver = new ChromeDriver();
+                Driver.Url = url;
+            }
+        }
+        public static void FinishSession()
+        {
+            if (Driver != null)            
+                Driver.Quit();            
+        }
         
+        public static void SelectNextTab()
+        {            
+            IList<String> allTabs = Driver.WindowHandles;
+            allTabs.Remove(Driver.CurrentWindowHandle);                        
+            
+            Driver.SwitchTo().Window(allTabs.First());
+        }
     }
 }

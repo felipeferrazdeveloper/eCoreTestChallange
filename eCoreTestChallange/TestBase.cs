@@ -16,7 +16,8 @@ namespace eCoreTestChallange
             
         }
 
-        [TearDown] public void TestTearDown() 
+        [TearDown] 
+        public void TestTearDown() 
         {
         
         }
