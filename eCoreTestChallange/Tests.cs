@@ -1,26 +1,36 @@
-using CustomSelenium;
+using eCoreTestChallange.PageObjects.Page;
+using NUnit.Framework;
+using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
 
 namespace eCoreTestChallange
 {
-    [TestClass]
-    public class Tests
+    [TestFixture]
+    public class Tests : TestBase
     {
-        [TestMethod]
+        [Test]
+        [Description("TC001 User can authenticate in the application with provided credentials")]
         public void PositiveLogin()
         {
-
+            LoginPage loginPage = new();
+            InvoiceListPage invoiceListPage = new();
+            
+            _ = loginPage
+                .LoginWithCredentials("demouser", "abc123");
+           
+            _ = invoiceListPage
+                .AssertUserIsOnPage();                   
         }
 
-        [TestMethod]
+        [Test]        
         public void NegativeLogin() 
         {
-        
+           
         }
         
-        [TestMethod]
+        [Test]
         public void ValidateInvoiceDetails() 
         {
-        
+           
         }
     }
 }

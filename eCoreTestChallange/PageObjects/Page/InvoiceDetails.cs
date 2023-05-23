@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomSelenium.PageObjects.Page
+namespace eCoreTestChallange.PageObjects.Page
 {
     public class InvoiceDetails : PageObject
     {
+        public override PageObject AssertUserIsOnPage()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

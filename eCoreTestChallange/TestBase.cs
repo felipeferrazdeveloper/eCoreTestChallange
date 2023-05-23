@@ -8,18 +8,19 @@ using System.Threading.Tasks;
 
 namespace eCoreTestChallange
 {
+    
     public class TestBase
     {
-        [SetUp] 
+        [SetUp]
         public void TestSetup() 
         {
-            
+            CustomSeleniumManager.StartSession("https://automation-sandbox-python-mpywqjbdza-uc.a.run.app/");            
         }
 
         [TearDown] 
         public void TestTearDown() 
         {
-        
+            CustomSeleniumManager.FinishSession();
         }
     }
 }
