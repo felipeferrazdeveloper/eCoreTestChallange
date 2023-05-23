@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using CustomSelenium.Elements;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,14 @@ namespace CustomSelenium.PageObjects.Page
     {
         public IWebDriver Driver { get; set; }
 
-        WebElement UsernameTextField;
-        WebElement PasswordTextField;
+        TextField UsernameTextField;
+        TextField PasswordTextField;
         WebElement LoginButton;
 
         public Login()
-        {
-            
+        {            
+            UsernameTextField = new TextField(By.Name("username"));
+            PasswordTextField = new TextField(By.Name("password"));            
         }
 
     }
