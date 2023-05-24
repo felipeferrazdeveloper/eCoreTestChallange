@@ -1,6 +1,5 @@
 using eCoreTestChallange.PageObjects.Page;
 using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using System.Collections;
 using System.Data;
 using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
@@ -27,15 +26,40 @@ namespace eCoreTestChallange
         }
 
         [Test]
-        public void NegativeLogin()
+        [Description("TC002 application denies the user with invalid credentials")]
+        [TestCaseSource(nameof(NegativeLoginDataSet))]
+        public void NegativeLogin(String username, String password)
         {
+            LoginPage loginPage = new();
+            InvoiceListPage invoiceListPage = new();
 
+            _ = loginPage
+                .LoginWithCredentials(username, password)
+                .ValidateAccessDeniedMessage();
         }
 
         [Test]
         public void ValidateInvoiceDetails()
         {
 
+        }
+
+
+
+        static IEnumerable PositiveLoginDataSet()
+        {
+            foreach (DataRow row in TestData.PositiveLogin().Rows)
+            {
+                yield return new TestCaseData(row["username"], row["password"]);
+            }
+        }
+
+        static IEnumerable NegativeLoginDataSet()
+        {
+            foreach (DataRow row in TestData.NegativeLogin().Rows)
+            {
+                yield return new TestCaseData(row["username"], row["password"]);
+            }
         }
     }
 }

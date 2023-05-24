@@ -22,6 +22,20 @@ namespace eCoreTestChallange
 
             testData.Rows.Add("demouser", "abc123");
             return testData;
-        }        
+        }
+
+        public static DataTable NegativeLogin()
+        {
+            testData = new DataTable();
+
+            testData.Columns.Add("username", typeof(string));
+            testData.Columns.Add("password", typeof(string));
+
+            testData.Rows.Add("Demouser", "abc123");
+            testData.Rows.Add("demouser_", "xyz");
+            testData.Rows.Add("demouser", "nananana");
+            testData.Rows.Add("demouser", "abc123");
+            return testData;
+        }
     }
 }
