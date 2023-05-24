@@ -7,9 +7,9 @@ namespace eCoreTestChallange.PageObjects.Page
 {
     public class InvoiceListPage : PageObject
     {
-        public override InvoiceListPage AssertUserIsOnPage()
+        public override PageObject AssureUserIsOnPage()
         {
-            return (InvoiceListPage)this.AssertUserIsOnPage("Invoice List");
+            return (InvoiceListPage)this.AssureUserIsOnPage("Invoice List");
         }
     }
 

@@ -19,10 +19,11 @@ namespace eCoreTestChallange
             InvoiceListPage invoiceListPage = new();
             
             _ = loginPage
+                .AssureUserIsOnPage()
                 .LoginWithCredentials(username, password);
            
             _ = invoiceListPage
-                .AssertUserIsOnPage();                   
+                .AssureUserIsOnPage();                   
         }
 
         [Test]

@@ -17,9 +17,9 @@ namespace eCoreTestChallange.PageObjects.Page
             LoginButton = new Button(By.Id("btnLogin"));
         }
 
-        public override PageObject AssertUserIsOnPage()
+        public override LoginPage AssureUserIsOnPage()
         {
-            throw new NotImplementedException();
+            return (LoginPage)this.AssureUserIsOnPage("Login", By.CssSelector("h1"));
         }
 
         public LoginPage LoginWithCredentials(String username, String password)

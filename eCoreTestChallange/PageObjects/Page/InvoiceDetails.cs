@@ -8,7 +8,7 @@ namespace eCoreTestChallange.PageObjects.Page
 {
     public class InvoiceDetails : PageObject
     {
-        public override PageObject AssertUserIsOnPage()
+        public override PageObject AssureUserIsOnPage()
         {
             throw new NotImplementedException();
         }

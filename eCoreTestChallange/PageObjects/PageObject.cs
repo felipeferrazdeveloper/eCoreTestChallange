@@ -10,8 +10,7 @@ namespace eCoreTestChallange.PageObjects
         TextLabel PageHeader;
 
         public PageObject() 
-        {
-            PageHeader = new TextLabel(By.CssSelector("h2"));
+        {            
         }
 
         public IWebDriver Driver
@@ -20,10 +19,13 @@ namespace eCoreTestChallange.PageObjects
             set => Driver = CustomSeleniumManager.GetWebDriver();
         }
 
-        public abstract PageObject AssertUserIsOnPage();
-
-        protected PageObject AssertUserIsOnPage(String expectedValue)
+        public abstract PageObject AssureUserIsOnPage();
+      
+        protected PageObject AssureUserIsOnPage(String expectedValue, By? by=null)
         {
+            if (by == null)
+                by = By.CssSelector("h2");
+            PageHeader = new TextLabel(by);
             Assert.AreEqual(expectedValue, PageHeader.GetText());
             return this;
         }
