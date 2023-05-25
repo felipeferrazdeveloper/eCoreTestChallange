@@ -1,10 +1,6 @@
-using CustomSelenium;
-using CustomSelenium.ElementObjects.Element;
-using eCoreTestChallange.Data;
 using eCoreTestChallange.Data.PageData;
 using eCoreTestChallange.PageObjects.Page;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using System.Collections;
 using System.Data;
 using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
