@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using System.Text.RegularExpressions;
+using OpenQA.Selenium;
 
 namespace CustomSelenium.ElementObjects.Element;
 
@@ -11,5 +12,11 @@ public class TextLabel : ElementObject
     public virtual string GetText()
     {
         return GetVisibleElement().Text.Trim();
+    }
+
+    public string GetText(string regex)
+    {
+        var match = Regex.Match(GetText(), regex);
+        return match.Value;
     }
 }

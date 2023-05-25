@@ -30,7 +30,7 @@ public class InvoiceDetailsPage : PageObject
         Assert.Multiple(() =>
         {
             Assert.AreEqual(data.HotelName, _hotelName.GetText());
-            Assert.AreEqual(data.InvoiceNumber, _invoiceNumber.GetText());
+            Assert.AreEqual(data.InvoiceNumber, _invoiceNumber.GetText("(?<=Invoice\\s#)\\d{3,}(?=\\s" + "details)"));
             Assert.AreEqual(data.InvoiceDate, _invoiceDate.GetText());
             Assert.AreEqual(data.DueDate, _dueDate.GetText());                
             Assert.AreEqual(data.BookingCode, _bookingCode.GetText());
@@ -40,7 +40,7 @@ public class InvoiceDetailsPage : PageObject
             Assert.AreEqual(data.CheckIn, _checkIn.GetText());
             Assert.AreEqual(data.CheckOut, _checkOut.GetText());
             Assert.AreEqual(data.CustomerDetails, _customerDetails.GetText());                                
-            Assert.AreEqual(data.DepositNow, _billingDetails.GetTableDataValue("Deposit Now"));
+            Assert.AreEqual(data.DepositNow, _billingDetails.GetTableDataValue("Deposit Nowt"));
             Assert.AreEqual(data.TaxAndVat, _billingDetails.GetTableDataValue("Tax&VAT"));
             Assert.AreEqual(data.TotalAmount, _billingDetails.GetTableDataValue("Total Amount"));
         });
