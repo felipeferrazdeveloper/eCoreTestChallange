@@ -10,7 +10,7 @@ public static class CustomSeleniumManager
 
     private static IWebDriver GetWebDriver() => _driver ?? throw new Exception("No driver session available");
 
-    public static void StartSession(string url)
+    public static void StartSession(string url, string testName)
     {
         _driver ??= new ChromeDriver(url);
         _driver.Navigate().GoToUrl(url);

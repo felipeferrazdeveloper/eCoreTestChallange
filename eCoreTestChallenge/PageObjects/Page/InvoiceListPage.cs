@@ -1,5 +1,6 @@
 ﻿using CustomSelenium;
 using CustomSelenium.ElementObjects.Element;
+using eCoreTestChallenge.Data;
 using OpenQA.Selenium;
 
 namespace eCoreTestChallenge.PageObjects.Page;
@@ -8,7 +9,7 @@ public class InvoiceListPage : PageObject
 {
     public override InvoiceListPage AssureUserIsOnPage()
     {
-        return (InvoiceListPage)this.AssureUserIsOnPage("Invoice List");
+        return (InvoiceListPage)this.AssureUserIsOnPage(AppLabels.Invoice_List);
     }
 
     public InvoiceListPage AccessFirstInvoiceDetails()
@@ -19,7 +20,7 @@ public class InvoiceListPage : PageObject
 
     public InvoiceListPage AccessInvoiceDetailsAtPosition(int position)
     {
-        Button invoiceLink = new(By.XPath("//a[text()='Invoice Details']["+position+"]"));
+        Button invoiceLink = new(By.XPath($"//a[text()='{AppLabels.Invoice_Details}']["+position+"]"));
         invoiceLink.Click();
         CustomSeleniumManager.SelectNextTab();
         return this;

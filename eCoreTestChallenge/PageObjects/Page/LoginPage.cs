@@ -1,4 +1,5 @@
 ﻿using CustomSelenium.ElementObjects.Element;
+using eCoreTestChallenge.Data;
 using eCoreTestChallenge.Data.PageData;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -27,7 +28,16 @@ public class LoginPage : PageObject
 
     public LoginPage ValidateAccessDeniedMessage()
     {
-        Assert.AreEqual("Wrong username or password.", _messageFeedbackLabel.GetText());
+        try
+        {
+            var message = _messageFeedbackLabel.GetText();
+            Assert.AreEqual(AppLabels.Wrong_username_or_password, message);
+        }
+        catch (NoSuchElementException ex)
+        {
+            throw new NoSuchElementException("Alert message not found!", ex);
+        }
+        
         return this;
     }
 }

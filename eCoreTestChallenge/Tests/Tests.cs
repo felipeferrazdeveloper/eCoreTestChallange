@@ -10,10 +10,7 @@ namespace eCoreTestChallenge.Tests;
 [TestFixture]
 public class Tests : TestBase
 {
-    private static IEnumerable PositiveLoginTestCaseSource()
-    {
-        return from DataRow row in LoginData.PositiveLoginTestData().Rows select new TestCaseData(row["Data"]);
-    }
+    private static IEnumerable PositiveLoginTestCaseSource() => from DataRow row in LoginData.PositiveLoginTestData().Rows select new TestCaseData(row["Data"]);
     [Test]
     [Description("TC001 User can authenticate in the application with valid credentials")]
     [TestCaseSource(nameof(PositiveLoginTestCaseSource))]
@@ -30,10 +27,7 @@ public class Tests : TestBase
             .AssureUserIsOnPage();
     }
 
-    private static IEnumerable NegativeLoginTestCaseSource()
-    {
-        return from DataRow row in LoginData.NegativeLoginTestData().Rows select new TestCaseData(row["Data"]);
-    }
+    private static IEnumerable NegativeLoginTestCaseSource() => from DataRow row in LoginData.NegativeLoginTestData().Rows select new TestCaseData(row["Data"]);
     [Test]
     [Description("TC002 application denies the user with invalid credentials")]
     [TestCaseSource(nameof(NegativeLoginTestCaseSource))]
@@ -48,10 +42,7 @@ public class Tests : TestBase
     }
 
 
-    private static IEnumerable ValidateInvoiceDetailsTestCaseSource()
-    {
-        return from DataRow row in InvoiceData.SampleInvoiceTestData().Rows select new TestCaseData(row["Data"]);
-    }
+    private static IEnumerable ValidateInvoiceDetailsTestCaseSource() => from DataRow row in InvoiceData.SampleInvoiceTestData().Rows select new TestCaseData(row["Data"]);
     [Test]
     [Description("TC003 Check listed invoice info presented")]
     [TestCaseSource(nameof(ValidateInvoiceDetailsTestCaseSource))]
