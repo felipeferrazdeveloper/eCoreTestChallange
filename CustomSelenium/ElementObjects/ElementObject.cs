@@ -12,7 +12,7 @@ public abstract class ElementObject
     protected ElementObject(By byLocator, int timeoutSeconds)
     {
         this.ByLocator = byLocator;
-        this.Wait = new WebDriverWait(CustomSeleniumManager.GetWebDriver(), new TimeSpan(0, 0, timeoutSeconds));            
+        this.Wait = CustomSeleniumManager.GetDriverWait(timeoutSeconds);
     }
 
     protected IWebElement GetVisibleElement()

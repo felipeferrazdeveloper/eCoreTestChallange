@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace CustomSelenium;
 
@@ -20,6 +21,12 @@ public static class CustomSeleniumManager
         _driver?.Quit();
         _driver = null;
     }
+
+    public static WebDriverWait GetDriverWait(int timeoutSeconds)
+    {
+        return new WebDriverWait(CustomSeleniumManager.GetWebDriver(), new TimeSpan(0, 0, timeoutSeconds));
+    }
+
 
     public static void SelectNextTab()
     {            
