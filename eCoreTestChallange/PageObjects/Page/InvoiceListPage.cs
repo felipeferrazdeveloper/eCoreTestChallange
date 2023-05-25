@@ -1,17 +1,28 @@
-﻿using CustomSelenium.ElementObjects.Element;
-using NUnit.Framework;
+﻿using CustomSelenium;
+using CustomSelenium.ElementObjects.Elements;
 using OpenQA.Selenium;
-using System.Reflection.PortableExecutable;
 
 namespace eCoreTestChallange.PageObjects.Page
 {
     public class InvoiceListPage : PageObject
     {
-        public override PageObject AssureUserIsOnPage()
+        public override InvoiceListPage AssureUserIsOnPage()
         {
             return (InvoiceListPage)this.AssureUserIsOnPage("Invoice List");
         }
+
+        public InvoiceListPage AccessFirstInvoiceDetails()
+        {
+            AccessInvoiceDetailsAtPosition(1);
+            return this;
+        }
+
+        public InvoiceListPage AccessInvoiceDetailsAtPosition(int position)
+        {
+            Button InvoiceLink = new Button(By.XPath("//a[text()='Invoice Details']["+position+"]"));
+            InvoiceLink.Click();
+            CustomSeleniumManager.SelectNextTab();
+            return this;
+        }
     }
-
-
 }

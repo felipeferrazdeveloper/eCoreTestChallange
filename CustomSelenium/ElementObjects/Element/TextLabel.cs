@@ -8,9 +8,9 @@ namespace CustomSelenium.ElementObjects.Element
         {
         }
 
-        public String GetText()
+        public virtual String GetText()
         {
-            return GetVisibleElement().Text;
+            return GetVisibleElement().Text.Trim();
         }
     }
 }

@@ -8,24 +8,34 @@ namespace CustomSelenium.ElementObjects.Element
         {
         }
 
-        public void Clear() 
+        public TextField Clear() 
         { 
             this
                 .GetVisibleElement()
                 .Clear();
+            return this;
         }
      
-        public void FillTextField(string value)
+        public TextField FillTextField(string value)
         {
+            if (value == null)
+                throw new NullReferenceException("Check data! value to Fill TextField is NULL");
+           
             this
                 .GetVisibleElement()
                 .SendKeys(value);
+
+            return this;           
         }
 
-        public void ClearAndFillTextField(string value)
+        public TextField ClearAndFillTextField(string value)
         {
-            Clear();
-            FillTextField(value);
+            if (value == null)
+                throw new NullReferenceException("Check data! value to Fill TextField is NULL");
+
+            return this
+                .Clear()
+                .FillTextField(value);
         }
     }
 }

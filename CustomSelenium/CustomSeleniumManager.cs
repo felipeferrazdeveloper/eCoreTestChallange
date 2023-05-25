@@ -23,7 +23,7 @@ namespace CustomSelenium
 
         public static void SelectNextTab()
         {            
-            IList<String> allTabs = GetWebDriver().WindowHandles;
+            IList<String> allTabs = new List<String>(GetWebDriver().WindowHandles);
             allTabs.Remove(GetWebDriver().CurrentWindowHandle);                        
             
             GetWebDriver().SwitchTo().Window(allTabs.First());

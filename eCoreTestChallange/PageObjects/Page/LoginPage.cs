@@ -1,5 +1,6 @@
 ﻿using CustomSelenium.ElementObjects.Element;
 using CustomSelenium.ElementObjects.Elements;
+using eCoreTestChallange.Data.PageData;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -25,10 +26,10 @@ namespace eCoreTestChallange.PageObjects.Page
             return (LoginPage)this.AssureUserIsOnPage("Login", By.CssSelector("h1"));
         }       
 
-        public LoginPage LoginWithCredentials(String username, String password)
+        public LoginPage LoginWithCredentials(LoginData data)
         {
-            UsernameTextField.ClearAndFillTextField(username);
-            PasswordTextField.ClearAndFillTextField(password);
+            UsernameTextField.ClearAndFillTextField(data.Username);
+            PasswordTextField.ClearAndFillTextField(data.Password);
             LoginButton.Click();
             return this;
         }

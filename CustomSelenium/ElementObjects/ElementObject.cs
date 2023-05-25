@@ -5,7 +5,7 @@ namespace CustomSelenium.ElementObjects
 {
     public abstract class ElementObject
     {
-        private IWebElement Element { get; set; }
+        private IWebElement? Element { get; set; }
         protected WebDriverWait Wait { get; set; }
         protected By ByLocator { get; set; }
 
@@ -27,6 +27,6 @@ namespace CustomSelenium.ElementObjects
                 throw new Exception(String.Format("Element not visible! Timeout after {0} seconds. ", Wait.Timeout.TotalSeconds) + ex);
             }
             return this.Element;
-        }
+        }       
     }
 }

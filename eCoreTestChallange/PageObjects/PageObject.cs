@@ -7,11 +7,7 @@ namespace eCoreTestChallange.PageObjects
 {
     public abstract class PageObject
     {
-        TextLabel PageHeader;
-
-        public PageObject() 
-        {            
-        }
+        TextLabel? PageHeader;       
 
         public IWebDriver Driver
         {
@@ -29,6 +25,5 @@ namespace eCoreTestChallange.PageObjects
             Assert.AreEqual(expectedValue, PageHeader.GetText());
             return this;
         }
-
     }
 }
