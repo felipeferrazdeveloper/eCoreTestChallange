@@ -2,8 +2,8 @@
 using CustomSelenium.ElementObjects.Elements;
 using OpenQA.Selenium;
 
-namespace eCoreTestChallange.PageObjects.Page
-{
+namespace eCoreTestChallenge.PageObjects.Page;
+
     public class InvoiceListPage : PageObject
     {
         public override InvoiceListPage AssureUserIsOnPage()

@@ -1,8 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace CustomSelenium.ElementObjects
-{
+namespace CustomSelenium.ElementObjects;
+
     public abstract class ElementObject
     {
         private IWebElement? Element { get; set; }

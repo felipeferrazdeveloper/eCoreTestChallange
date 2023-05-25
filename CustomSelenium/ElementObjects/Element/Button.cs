@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomSelenium.ElementObjects.Elements
+namespace CustomSelenium.ElementObjects.Element
 {
     public class Button : ElementObject
     {

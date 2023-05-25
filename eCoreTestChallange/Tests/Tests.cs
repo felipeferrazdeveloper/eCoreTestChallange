@@ -3,10 +3,13 @@ using eCoreTestChallange.PageObjects.Page;
 using NUnit.Framework;
 using System.Collections;
 using System.Data;
+using eCoreTestChallenge.Data.PageData;
+using eCoreTestChallenge.PageObjects.Page;
+using NUnit.Framework;
 using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
 
-namespace eCoreTestChallange.Tests
-{
+namespace eCoreTestChallenge.Tests;
+
     [TestFixture]
     public class Tests : TestBase
     {

@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace eCoreTestChallange.Data.PageData
+namespace eCoreTestChallenge.Data.PageData;
 {
     public class LoginData
     {

@@ -1,7 +1,7 @@
 ﻿using CustomSelenium;
 using NUnit.Framework;
 
-namespace eCoreTestChallange.Tests
+namespace eCoreTestChallenge.Tests;
 {
 
     public class TestBase

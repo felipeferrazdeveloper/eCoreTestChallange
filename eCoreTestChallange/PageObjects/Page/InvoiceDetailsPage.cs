@@ -1,10 +1,10 @@
 ﻿using CustomSelenium.ElementObjects.Element;
-using eCoreTestChallange.Data.PageData;
+using eCoreTestChallenge.Data.PageData;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace eCoreTestChallange.PageObjects.Page
-{
+namespace eCoreTestChallenge.PageObjects.Page;
+
     public class InvoiceDetailsPage : PageObject
     {
         TextLabel HotelName = new TextLabel(By.CssSelector("h4"));

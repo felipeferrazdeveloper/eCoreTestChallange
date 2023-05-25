@@ -3,8 +3,8 @@ using CustomSelenium.ElementObjects.Element;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace eCoreTestChallange.PageObjects
-{
+namespace eCoreTestChallenge.PageObjects;
+
     public abstract class PageObject
     {
         TextLabel? PageHeader;       

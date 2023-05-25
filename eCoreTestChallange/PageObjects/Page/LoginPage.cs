@@ -1,11 +1,10 @@
 ﻿using CustomSelenium.ElementObjects.Element;
-using CustomSelenium.ElementObjects.Elements;
-using eCoreTestChallange.Data.PageData;
+using eCoreTestChallenge.Data.PageData;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace eCoreTestChallange.PageObjects.Page
-{
+namespace eCoreTestChallenge.PageObjects.Page;
+
     public class LoginPage : PageObject
     {        
         TextField UsernameTextField;
