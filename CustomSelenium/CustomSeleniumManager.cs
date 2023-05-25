@@ -1,32 +1,31 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace CustomSelenium
+namespace CustomSelenium;
+
+public static class CustomSeleniumManager
 {
-    public class CustomSeleniumManager
+    private static IWebDriver? _driver;
+
+    private static IWebDriver GetWebDriver() => _driver ?? throw new Exception("No driver session available");
+
+    public static void StartSession(string url)
     {
-        private static IWebDriver? Driver;
+        _driver ??= new ChromeDriver(url);
+        _driver.Navigate().GoToUrl(url);
+    }
 
-        static public IWebDriver GetWebDriver() => Driver ?? throw new Exception("No driver session available");
+    public static void FinishSession()
+    {
+        _driver?.Quit();
+        _driver = null;
+    }
 
-        public static void StartSession(String url)
-        {
-            Driver ??= new ChromeDriver(url);
-            Driver.Navigate().GoToUrl(url);
-        }
-
-        public static void FinishSession()
-        {
-            Driver?.Quit();
-            Driver = null;
-        }
-
-        public static void SelectNextTab()
-        {            
-            IList<String> allTabs = new List<String>(GetWebDriver().WindowHandles);
-            allTabs.Remove(GetWebDriver().CurrentWindowHandle);                        
+    public static void SelectNextTab()
+    {            
+        IList<string> allTabs = new List<string>(GetWebDriver().WindowHandles);
+        allTabs.Remove(GetWebDriver().CurrentWindowHandle);                        
             
-            GetWebDriver().SwitchTo().Window(allTabs.First());
-        }
+        GetWebDriver().SwitchTo().Window(allTabs.First());
     }
 }

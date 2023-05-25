@@ -5,46 +5,45 @@ using OpenQA.Selenium;
 
 namespace eCoreTestChallenge.PageObjects.Page;
 
-    public class InvoiceDetailsPage : PageObject
+public class InvoiceDetailsPage : PageObject
+{
+    private readonly TextLabel _hotelName = new(By.CssSelector("h4"));
+    private readonly TextLabel _invoiceNumber = new(By.CssSelector("h6"));
+    private readonly ListTextLabel _invoiceDate = new(By.XPath("//span[text()='Invoice Date:']/parent::li"));
+    private readonly ListTextLabel _dueDate = new(By.XPath("//span[text()='Due Date:']/parent::li"));
+    private readonly TextLabel _bookingCode = new(By.XPath("//td[text()='Booking Code']/following-sibling::td"));
+    private readonly TextLabel _room = new(By.XPath("//td[text()='Room']/following-sibling::td"));
+    private readonly TextLabel _totalStayCount = new(By.XPath("//td[text()='Total Stay Count']/following-sibling::td"));
+    private readonly TextLabel _totalStayAmount = new(By.XPath("//td[text()='Total Stay Amount']/following-sibling::td"));
+    private readonly TextLabel _checkIn = new(By.XPath("//td[text()='Check-In']/following-sibling::td"));
+    private readonly TextLabel _checkOut = new(By.XPath("//td[text()='Check-Out']/following-sibling::td"));
+    private readonly TextLabel _customerDetails = new(By.XPath("//div/br/parent::div"));
+    private readonly HorizontalTable _billingDetails = new(By.XPath("//h5[text()='Billing Details']/following-sibling::table"));
+
+    public override InvoiceDetailsPage AssureUserIsOnPage()
     {
-        TextLabel HotelName = new TextLabel(By.CssSelector("h4"));
-        TextLabel InvoiceNumber = new TextLabel(By.CssSelector("h6"));
-        ListTextLabel InvoiceDate = new ListTextLabel(By.XPath("//span[text()='Invoice Date:']/parent::li"));
-        ListTextLabel DueDate = new ListTextLabel(By.XPath("//span[text()='Due Date:']/parent::li"));        
-        TextLabel BookingCode = new TextLabel(By.XPath("//td[text()='Booking Code']/following-sibling::td"));
-        TextLabel Room = new TextLabel(By.XPath("//td[text()='Room']/following-sibling::td"));
-        TextLabel TotalStayCount = new TextLabel(By.XPath("//td[text()='Total Stay Count']/following-sibling::td"));
-        TextLabel TotalStayAmount = new TextLabel(By.XPath("//td[text()='Total Stay Amount']/following-sibling::td"));
-        TextLabel CheckIn = new TextLabel(By.XPath("//td[text()='Check-In']/following-sibling::td"));
-        TextLabel CheckOut = new TextLabel(By.XPath("//td[text()='Check-Out']/following-sibling::td"));
-        TextLabel CustomerDetails = new TextLabel(By.XPath("//div/br/parent::div"));
-        HorizontalTable BillingDetails = new HorizontalTable(By.XPath("//h5[text()='Billing Details']/following-sibling::table"));
+        return (InvoiceDetailsPage)this.AssureUserIsOnPage("Invoice Details");
+    }
 
-        public override InvoiceDetailsPage AssureUserIsOnPage()
+    public InvoiceDetailsPage ValidateInvoiceData(InvoiceData data)
+    {
+        Assert.Multiple(() =>
         {
-            return (InvoiceDetailsPage)this.AssureUserIsOnPage("Invoice Details");
-        }
-
-        public InvoiceDetailsPage ValidateInvoiceData(InvoiceData data)
-        {
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(data.HotelName, HotelName.GetText());
-                Assert.AreEqual(data.InvoiceNumber, InvoiceNumber.GetText());
-                Assert.AreEqual(data.InvoiceDate, InvoiceDate.GetText());
-                Assert.AreEqual(data.DueDate, DueDate.GetText());                
-                Assert.AreEqual(data.BookingCode, BookingCode.GetText());
-                Assert.AreEqual(data.Room, Room.GetText());
-                Assert.AreEqual(data.TotalStayCount, TotalStayCount.GetText());
-                Assert.AreEqual(data.TotalStayAmount, TotalStayAmount.GetText());
-                Assert.AreEqual(data.CheckIn, CheckIn.GetText());
-                Assert.AreEqual(data.CheckOut, CheckOut.GetText());
-                Assert.AreEqual(data.CustomerDetails, CustomerDetails.GetText());                                
-                Assert.AreEqual(data.DepositNow, BillingDetails.GetTableDataValue("Deposit Nowt"));
-                Assert.AreEqual(data.TaxAndVAT, BillingDetails.GetTableDataValue("Tax&VAT"));
-                Assert.AreEqual(data.TotalAmount, BillingDetails.GetTableDataValue("Total Amount"));
-            });
-            return this;
-        }
+            Assert.AreEqual(data.HotelName, _hotelName.GetText());
+            Assert.AreEqual(data.InvoiceNumber, _invoiceNumber.GetText());
+            Assert.AreEqual(data.InvoiceDate, _invoiceDate.GetText());
+            Assert.AreEqual(data.DueDate, _dueDate.GetText());                
+            Assert.AreEqual(data.BookingCode, _bookingCode.GetText());
+            Assert.AreEqual(data.Room, _room.GetText());
+            Assert.AreEqual(data.TotalStayCount, _totalStayCount.GetText());
+            Assert.AreEqual(data.TotalStayAmount, _totalStayAmount.GetText());
+            Assert.AreEqual(data.CheckIn, _checkIn.GetText());
+            Assert.AreEqual(data.CheckOut, _checkOut.GetText());
+            Assert.AreEqual(data.CustomerDetails, _customerDetails.GetText());                                
+            Assert.AreEqual(data.DepositNow, _billingDetails.GetTableDataValue("Deposit Now"));
+            Assert.AreEqual(data.TaxAndVat, _billingDetails.GetTableDataValue("Tax&VAT"));
+            Assert.AreEqual(data.TotalAmount, _billingDetails.GetTableDataValue("Total Amount"));
+        });
+        return this;
     }
 }

@@ -5,38 +5,29 @@ using OpenQA.Selenium;
 
 namespace eCoreTestChallenge.PageObjects.Page;
 
-    public class LoginPage : PageObject
-    {        
-        TextField UsernameTextField;
-        TextField PasswordTextField;
-        Button LoginButton;
-        TextLabel MessageFeedbackLabel;
+public class LoginPage : PageObject
+{
+    private readonly TextField _usernameTextField = new(By.Name("username"));
+    private readonly TextField _passwordTextField = new(By.Name("password"));
+    private readonly Button _loginButton = new(By.Id("btnLogin"));
+    private readonly TextLabel _messageFeedbackLabel = new(By.CssSelector(".alert"));
 
-        public LoginPage()
-        {            
-            UsernameTextField = new TextField(By.Name("username"));
-            PasswordTextField = new TextField(By.Name("password"));
-            LoginButton = new Button(By.Id("btnLogin"));
-            MessageFeedbackLabel = new TextLabel(By.CssSelector(".alert"));
-        }
+    public override LoginPage AssureUserIsOnPage()
+    {            
+        return (LoginPage)this.AssureUserIsOnPage("Login", By.CssSelector("h1"));
+    }       
 
-        public override LoginPage AssureUserIsOnPage()
-        {            
-            return (LoginPage)this.AssureUserIsOnPage("Login", By.CssSelector("h1"));
-        }       
+    public LoginPage LoginWithCredentials(LoginData data)
+    {
+        _usernameTextField.ClearAndFillTextField(data.Username);
+        _passwordTextField.ClearAndFillTextField(data.Password);
+        _loginButton.Click();
+        return this;
+    }
 
-        public LoginPage LoginWithCredentials(LoginData data)
-        {
-            UsernameTextField.ClearAndFillTextField(data.Username);
-            PasswordTextField.ClearAndFillTextField(data.Password);
-            LoginButton.Click();
-            return this;
-        }
-
-        public LoginPage ValidateAccessDeniedMessage()
-        {
-            Assert.AreEqual("Wrong username or password.", MessageFeedbackLabel.GetText());
-            return this;
-        }
+    public LoginPage ValidateAccessDeniedMessage()
+    {
+        Assert.AreEqual("Wrong username or password.", _messageFeedbackLabel.GetText());
+        return this;
     }
 }

@@ -2,20 +2,18 @@
 using NUnit.Framework;
 
 namespace eCoreTestChallenge.Tests;
+
+public class TestBase
 {
-
-    public class TestBase
+    [SetUp]
+    public void TestSetup()
     {
-        [SetUp]
-        public void TestSetup()
-        {
-            CustomSeleniumManager.StartSession("https://automation-sandbox-python-mpywqjbdza-uc.a.run.app/");
-        }
+        CustomSeleniumManager.StartSession("https://automation-sandbox-python-mpywqjbdza-uc.a.run.app/");
+    }
 
-        [TearDown]
-        public void TestTearDown()
-        {
-            CustomSeleniumManager.FinishSession();
-        }
+    [TearDown]
+    public void TestTearDown()
+    {
+        CustomSeleniumManager.FinishSession();
     }
 }
