@@ -19,7 +19,7 @@ Test class was sliced in two classes *TestBase* and *Test* where TestBase stores
 
 ### Report
 This solution have a reporter that generates HTML files with the tests outcomes and another cool things. 
-Unfortunatelly there was no time to implement everything that we want to bring on report. But it's a better way to see issues and problems automatically identified.
+Unfortunatelly there was no time to implement everything that we want to bring to the report. But it's a better way to see issues and problems automatically identified.
 
 # Considerations on the proposed activity 
 
