@@ -1,43 +1,46 @@
-﻿using CustomSelenium.ElementObjects.Element;
-using eCoreTestChallenge.Data;
+﻿using eCoreTestChallenge.Data;
 using eCoreTestChallenge.Data.PageData;
+using eCoreTestChallenge.ElementObjects.Element;
+using eCoreTestChallenge.Report;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
-namespace eCoreTestChallenge.PageObjects.Page;
-
-public class LoginPage : PageObject
+namespace eCoreTestChallenge.PageObjects.Page
 {
-    private readonly TextField _usernameTextField = new(By.Name("username"));
-    private readonly TextField _passwordTextField = new(By.Name("password"));
-    private readonly Button _loginButton = new(By.Id("btnLogin"));
-    private readonly TextLabel _messageFeedbackLabel = new(By.CssSelector(".alert"));
-
-    public override LoginPage AssureUserIsOnPage()
-    {            
-        return (LoginPage)this.AssureUserIsOnPage("Login", By.CssSelector("h1"));
-    }       
-
-    public LoginPage LoginWithCredentials(LoginData data)
+    public class LoginPage : PageObject
     {
-        _usernameTextField.ClearAndFillTextField(data.Username);
-        _passwordTextField.ClearAndFillTextField(data.Password);
-        _loginButton.Click();
-        return this;
-    }
+        private readonly TextField _usernameTextField = new(By.Name("username"));
+        private readonly TextField _passwordTextField = new(By.Name("password"));
+        private readonly Button _loginButton = new(By.Id("btnLogin"));
+        private readonly TextLabel _messageFeedbackLabel = new(By.CssSelector(".alert"));
 
-    public LoginPage ValidateAccessDeniedMessage()
-    {
-        try
+        public override LoginPage AssureUserIsOnPage()
+        {            
+            Reporter.AddStepToNode("User is on Login Page");
+            return (LoginPage)this.AssureUserIsOnPage("Login", By.CssSelector("h1"));
+        }       
+
+        public LoginPage LoginWithCredentials(LoginData data)
         {
-            var message = _messageFeedbackLabel.GetText();
-            Assert.AreEqual(AppLabels.Wrong_username_or_password, message);
+            _usernameTextField.ClearAndFillTextField(data.Username);
+            _passwordTextField.ClearAndFillTextField(data.Password);
+            _loginButton.Click();
+            return this;
         }
-        catch (NoSuchElementException ex)
+
+        public LoginPage ValidateAccessDeniedMessage()
         {
-            throw new NoSuchElementException("Alert message not found!", ex);
-        }
+            try
+            {
+                var message = _messageFeedbackLabel.GetText();
+                Assert.AreEqual(AppLabels.Wrong_username_or_password, message);
+            }
+            catch (NoSuchElementException ex)
+            {
+                throw new NoSuchElementException("Alert message not found!", ex);
+            }
         
-        return this;
+            return this;
+        }
     }
 }

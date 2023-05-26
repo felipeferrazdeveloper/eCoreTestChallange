@@ -1,28 +1,29 @@
-﻿using CustomSelenium;
-using CustomSelenium.ElementObjects.Element;
+﻿
 using eCoreTestChallenge.Data;
+using eCoreTestChallenge.ElementObjects.Element;
 using OpenQA.Selenium;
 
-namespace eCoreTestChallenge.PageObjects.Page;
-
-public class InvoiceListPage : PageObject
+namespace eCoreTestChallenge.PageObjects.Page
 {
-    public override InvoiceListPage AssureUserIsOnPage()
+    public class InvoiceListPage : PageObject
     {
-        return (InvoiceListPage)this.AssureUserIsOnPage(AppLabels.Invoice_List);
-    }
+        public override InvoiceListPage AssureUserIsOnPage()
+        {
+            return (InvoiceListPage)this.AssureUserIsOnPage(AppLabels.Invoice_List);
+        }
 
-    public InvoiceListPage AccessFirstInvoiceDetails()
-    {
-        AccessInvoiceDetailsAtPosition(1);
-        return this;
-    }
+        public InvoiceListPage AccessFirstInvoiceDetails()
+        {
+            AccessInvoiceDetailsAtPosition(1);
+            return this;
+        }
 
-    public InvoiceListPage AccessInvoiceDetailsAtPosition(int position)
-    {
-        Button invoiceLink = new(By.XPath($"//a[text()='{AppLabels.Invoice_Details}']["+position+"]"));
-        invoiceLink.Click();
-        CustomSeleniumManager.SelectNextTab();
-        return this;
+        public InvoiceListPage AccessInvoiceDetailsAtPosition(int position)
+        {
+            Button invoiceLink = new(By.XPath($"//a[text()='{AppLabels.Invoice_Details}']["+position+"]"));
+            invoiceLink.Click();
+            CustomSeleniumManager.SelectNextTab();
+            return this;
+        }
     }
 }

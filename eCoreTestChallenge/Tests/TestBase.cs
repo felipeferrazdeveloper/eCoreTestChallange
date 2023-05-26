@@ -1,23 +1,42 @@
-﻿using AventStack.ExtentReports.Model;
-using CustomSelenium;
-using eCoreTestChallenge.Report;
+﻿using eCoreTestChallenge.Report;
 using NUnit.Framework;
+using System.Reflection;
 
-namespace eCoreTestChallenge.Tests;
-
-public class TestBase
+namespace eCoreTestChallenge.Tests
 {
-    [SetUp]
-    public void TestSetup()
+    public class TestBase
     {
-        CustomSeleniumManager.StartSession("https://automation-sandbox-python-mpywqjbdza-uc.a.run.app/", TestContext.CurrentContext.Test.FullName);
-        Reporter.BeforeScenario(TestContext.CurrentContext.Test.FullName);
-    }
+        [OneTimeSetUp]
+        public void ClassSetup()
+        {
+            Reporter.SetUpReport();
+        }
 
-    [TearDown]
-    public void TestTearDown()
-    {
-        CustomSeleniumManager.FinishSession();
-        Reporter.TearDown();
+        [SetUp]
+        public void TestSetup()
+        {
+            var methodName = TestContext.CurrentContext.Test.MethodName;
+            var methodDescription = this
+                .GetType()
+                .GetMethod(methodName)
+                .GetCustomAttribute<DescriptionAttribute>().Properties.Get("Description");
+
+            Reporter.SetTestName((string)methodDescription);
+
+            CustomSeleniumManager.StartSession("https://automation-sandbox-python-mpywqjbdza-uc.a.run.app/");
+        }
+
+        [TearDown]
+        public void TestTearDown()
+        {
+            Reporter.AfterTest(TestContext.CurrentContext.Result);
+            CustomSeleniumManager.FinishSession();
+        }
+
+        [OneTimeTearDown]
+        public void ClassTearDown()
+        {
+            Reporter.TearDown();
+        }
     }
 }
