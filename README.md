@@ -18,7 +18,7 @@ Test class was sliced in two classes *TestBase* and *Test* where TestBase stores
 > Even so, the **TestBase** class was created precisely with the intention of facilitating the creation of new classes.
 
 ### Report
-This solution have a reporter that generates HTML files with the tests outcomes and another coll things. 
+This solution have a reporter that generates HTML files with the tests outcomes and another cool things. 
 Unfortunatelly there was no time to implement everything that we want to bring on report. But it's a better way to see issues and problems automatically identified.
 
 # Considerations on the proposed activity 
