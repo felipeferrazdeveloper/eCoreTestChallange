@@ -51,7 +51,7 @@ namespace eCoreTestChallenge.CustomSelenium
             Screenshot screenshot = screenshooter.GetScreenshot();
 
             screenshot.SaveAsFile(filePath + fileName, ScreenshotImageFormat.Png);
-            Reporter.AttachScreenShot(filePath + fileName + ".png");
+            Reporter.AttachScreenShot(filePath + fileName);
         }
     }
 }

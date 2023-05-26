@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using eCoreTestChallenge.Report;
+using OpenQA.Selenium;
 
 namespace eCoreTestChallenge.ElementObjects.Element
 {
@@ -18,8 +20,14 @@ namespace eCoreTestChallenge.ElementObjects.Element
                 index++;
                 break;
             }
+
             if (index == -1)
-                throw new Exception("Column '"+columnName+"' not found!");
+            {
+                var ex = new Exception("Column '" + columnName + "' not found!");
+                Reporter.Log(Status.Error, ex.Message);
+                throw ex;
+            }
+                
 
             var value = GetVisibleElement().FindElement(By.XPath("//thead/following-sibling::tbody/tr[" + row + "]/td[" + index + "]")).Text;
 
