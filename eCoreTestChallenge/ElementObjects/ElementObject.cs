@@ -1,4 +1,5 @@
-﻿using eCoreTestChallenge.Report;
+﻿using eCoreTestChallenge.CustomSelenium;
+using eCoreTestChallenge.Report;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -25,6 +26,7 @@ namespace eCoreTestChallenge.ElementObjects
             }
             catch (TimeoutException ex)
             {
+                
                 CustomSeleniumManager.TakeScreenShot(Reporter.Folder);
                 throw new Exception($"Element not visible! Timeout after {Wait.Timeout.TotalSeconds} seconds. " + ex);
             }

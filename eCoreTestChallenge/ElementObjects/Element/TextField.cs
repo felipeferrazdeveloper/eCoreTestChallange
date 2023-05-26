@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports;
+using eCoreTestChallenge.Report;
+using OpenQA.Selenium;
 
 namespace eCoreTestChallenge.ElementObjects.Element
 {
@@ -19,7 +21,11 @@ namespace eCoreTestChallenge.ElementObjects.Element
         public TextField FillTextField(string value)
         {
             if (value == null)
+            {
+                Reporter.Log(Status.Error, "<span style='color: red'>Check test data!</span> - Value is <b>NULL<b> to fill Text Field");
                 throw new NullReferenceException("Check data! value to Fill TextField is NULL");
+            }
+                
            
             this
                 .GetVisibleElement()
@@ -30,9 +36,6 @@ namespace eCoreTestChallenge.ElementObjects.Element
 
         public TextField ClearAndFillTextField(string value)
         {
-            if (value == null)
-                throw new NullReferenceException("Check data! value to Fill TextField is NULL");
-
             return this
                 .Clear()
                 .FillTextField(value);

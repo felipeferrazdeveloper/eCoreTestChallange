@@ -2,6 +2,7 @@ using System.Collections;
 using System.Data;
 using eCoreTestChallenge.Data.PageData;
 using eCoreTestChallenge.PageObjects.Page;
+using eCoreTestChallenge.Report;
 using NUnit.Framework;
 using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
 
@@ -12,7 +13,7 @@ namespace eCoreTestChallenge.Tests
     {
         private static IEnumerable PositiveLoginTestCaseSource() => from DataRow row in LoginData.PositiveLoginTestData().Rows select new TestCaseData(row["Data"]);
         [Test]
-        [Description("TC001 User can authenticate in the application with valid credentials")]
+        [Description("TC001 - Verify user authentication with provided credentials")]
         [TestCaseSource(nameof(PositiveLoginTestCaseSource))]
         public void PositiveLogin(LoginData data)
         {
@@ -27,12 +28,17 @@ namespace eCoreTestChallenge.Tests
                 .AssureUserIsOnPage();
         }
 
-        private static IEnumerable NegativeLoginTestCaseSource() => from DataRow row in LoginData.NegativeLoginTestData().Rows select new TestCaseData(row["Data"]);
+        private static IEnumerable NegativeLoginTestCaseSource()
+        {
+            return from DataRow row in LoginData.NegativeLoginTestData().Rows select new TestCaseData(row["Data"]);
+        }
+
         [Test]
-        [Description("TC002 application denies the user with invalid credentials")]
+        [Description("TC002 - Verify that the application prevents user login with invalid credentials.")]
         [TestCaseSource(nameof(NegativeLoginTestCaseSource))]
         public void NegativeLogin(LoginData data)
         {
+            //Reporter.SetTestData(data);
             LoginPage loginPage = new();
 
             _ = loginPage
@@ -44,7 +50,7 @@ namespace eCoreTestChallenge.Tests
 
         private static IEnumerable ValidateInvoiceDetailsTestCaseSource() => from DataRow row in InvoiceData.SampleInvoiceTestData().Rows select new TestCaseData(row["Data"]);
         [Test]
-        [Description("TC003 Check listed invoice info presented")]
+        [Description("TC003 - Verify that the invoice information is correctly displayed.")]
         [TestCaseSource(nameof(ValidateInvoiceDetailsTestCaseSource))]
         public void ValidateInvoiceDetails(InvoiceData data)
         {

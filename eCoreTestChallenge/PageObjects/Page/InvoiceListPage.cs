@@ -1,6 +1,9 @@
 ﻿
+using AventStack.ExtentReports;
+using eCoreTestChallenge.CustomSelenium;
 using eCoreTestChallenge.Data;
 using eCoreTestChallenge.ElementObjects.Element;
+using eCoreTestChallenge.Report;
 using OpenQA.Selenium;
 
 namespace eCoreTestChallenge.PageObjects.Page
@@ -22,7 +25,9 @@ namespace eCoreTestChallenge.PageObjects.Page
         {
             Button invoiceLink = new(By.XPath($"//a[text()='{AppLabels.Invoice_Details}']["+position+"]"));
             invoiceLink.Click();
+            Reporter.LogUserAction("Clicked", $"Invoice link at row #{position}");
             CustomSeleniumManager.SelectNextTab();
+            Reporter.Log(Status.Pass, "User selected next tab");
             return this;
         }
     }

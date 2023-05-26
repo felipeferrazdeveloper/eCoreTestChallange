@@ -2,7 +2,7 @@
 
 namespace eCoreTestChallenge.Data.PageData
 {
-    public record InvoiceData : LoginData
+    public record InvoiceData : LoginData, IPageData
     {        
         public string? HotelName { get; private init; }
         public string? InvoiceDate { get; private init; }

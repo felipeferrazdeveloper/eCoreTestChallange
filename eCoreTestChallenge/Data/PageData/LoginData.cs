@@ -2,7 +2,7 @@
 
 namespace eCoreTestChallenge.Data.PageData
 {
-    public record LoginData : BaseData
+    public record LoginData : IPageData
     {
         protected static DataTable? _testData;
 

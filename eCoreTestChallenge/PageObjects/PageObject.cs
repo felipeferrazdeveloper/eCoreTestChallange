@@ -1,4 +1,6 @@
-﻿using eCoreTestChallenge.ElementObjects.Element;
+﻿using AventStack.ExtentReports;
+using eCoreTestChallenge.ElementObjects.Element;
+using eCoreTestChallenge.Report;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -16,6 +18,7 @@ namespace eCoreTestChallenge.PageObjects
                 by = By.CssSelector("h2");
             _pageHeader = new TextLabel(by);
             Assert.AreEqual(expectedValue, _pageHeader.GetText());
+            Reporter.Log(Status.Pass, $"Assured that user is on {expectedValue}  page.");
             return this;
         }
     }
