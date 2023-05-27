@@ -2,7 +2,6 @@ using System.Collections;
 using System.Data;
 using eCoreTestChallenge.Data.PageData;
 using eCoreTestChallenge.PageObjects.Page;
-using eCoreTestChallenge.Report;
 using NUnit.Framework;
 using DescriptionAttribute = NUnit.Framework.DescriptionAttribute;
 
@@ -66,6 +65,6 @@ namespace eCoreTestChallenge.Tests
             _ = invoiceDetailsPage
                 .AssureUserIsOnPage()
                 .ValidateInvoiceData(data);
-        }        
+        }
     }
 }

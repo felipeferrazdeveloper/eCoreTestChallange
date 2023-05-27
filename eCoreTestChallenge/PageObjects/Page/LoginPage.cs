@@ -46,7 +46,6 @@ namespace eCoreTestChallenge.PageObjects.Page
             {
                 Reporter.Log(Status.Fail, $"Cannot achieve alert message");
                 CustomSeleniumManager.TakeScreenShot(Reporter.ScreenShotFolder);
-                Reporter.LogException(ex);
                 throw ex;
             }
         

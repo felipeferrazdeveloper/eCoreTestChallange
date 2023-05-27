@@ -23,7 +23,7 @@ namespace eCoreTestChallenge.Report
         public static string NowString()
         {
             return String.Format("{0,4:D}_{1,2:D2}_{2,2:D2}_{3,2:D2}.{4,2:D2}.{5,2:D2}.{6,4:D4}", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute,
-               DateTime.Now.Second, DateTime.Now.Millisecond);
+               DateTime.Now.Second, DateTime.Now.Millisecond).Trim();
         }
             
 
@@ -31,6 +31,7 @@ namespace eCoreTestChallenge.Report
         {
             var htmlReporter = new ExtentHtmlReporter(Folder + $"reports\\{NowString()}\\")
             {
+                AnalysisStrategy = AnalysisStrategy.Class,
                 Config =
                 {
                     EnableTimeline = true,
@@ -69,6 +70,7 @@ namespace eCoreTestChallenge.Report
         /// <param name="filePath">Full Path of screenshot including filename and extension</param>
         public static void AttachScreenShot(string filePath)
         {
+            _currentNode.Model.Status = Status.Warning;
             _currentNode.AddScreenCaptureFromPath(filePath);
         }
 
@@ -108,16 +110,16 @@ namespace eCoreTestChallenge.Report
         {
             Log(Status.Pass, $"User {actionName} on {elementName}");
         }
-        public static void LogException(Exception exception)
-        {
-            if(exception.GetType() != typeof(AssertionException))
-                _currentNode.Fail(exception);
-        }
 
         public static void TestTearDown(TestContext.ResultAdapter result)
         {
             if (result.FailCount > 0)
-                _currentNode.Fail(result.Message);
+            {
+                string message = result.Message;
+                string tMessage = AssertMessageTreatment(message);
+                _currentNode.Fail(tMessage);
+            }
+                
             else
                 _currentNode.Pass("Test finished successfully!");
 
@@ -126,6 +128,45 @@ namespace eCoreTestChallenge.Report
         public static void FlushReport()
         {
             _extent.Flush();
+        }
+
+        public  static string AssertMessageTreatment(string message)
+        {
+            message = message.Trim();
+            int expectedLength;
+            int actualLength;
+            int diffIndex;
+            string expectedString;
+            string actualString;
+
+            string expectedLengthRegex = @"Expected string length (\d+)";
+            string actualLengthRegex = @"but was (\d+)";
+            string indexDiffRegex = @"Strings differ at index (\d+)";
+            string expectedStringRegex = @"Expected: ""(.*?)""";
+            string actualStringRegex = @"But was: ""(.*?)""";
+
+            Match match = Regex.Match(message, expectedLengthRegex);
+            expectedLength = int.Parse(match.Groups[1].Value);
+
+            if (match.Success)
+            {
+
+                match = Regex.Match(message, actualLengthRegex);
+                actualLength = int.Parse(match.Groups[1].Value);
+                match = Regex.Match(message, indexDiffRegex);
+                diffIndex = int.Parse(match.Groups[1].Value);
+                match = Regex.Match(message, expectedStringRegex);
+                expectedString = match.Groups[1].Value;
+                match = Regex.Match(message, actualStringRegex);
+                actualString = match.Groups[1].Value;
+
+                string output = "<span style='color:red'><b>Assertion failed</b></span><br/>" +
+                                "Expected string: <span style='color:green'>" + expectedString+"</span><br/>" +
+                                "Actual   string: <span style='color:red'>" + actualString+"</span><br/>" +
+                                "The difference begins at\"<b>" + expectedString.Substring(diffIndex-1, 1)+"</b>\"";
+                return output;
+            }
+            return message;
         }
     }
 }
