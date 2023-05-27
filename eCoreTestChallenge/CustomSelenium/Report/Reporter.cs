@@ -143,7 +143,8 @@ namespace eCoreTestChallenge.Report
             string actualLengthRegex = @"but was (\d+)";
             string indexDiffRegex = @"Strings differ at index (\d+)";
             string expectedStringRegex = @"Expected: ""(.*?)""";
-            string actualStringRegex = @"But was: ""(.*?)""";
+            string actualStringRegex = @"But was:  ""(.*?)""";
+
 
             Match match = Regex.Match(message, expectedLengthRegex);
             expectedLength = int.Parse(match.Groups[1].Value);
@@ -160,10 +161,12 @@ namespace eCoreTestChallenge.Report
                 match = Regex.Match(message, actualStringRegex);
                 actualString = match.Groups[1].Value;
 
+                string diffString = actualString.Substring(diffIndex);
+
                 string output = "<span style='color:red'><b>Assertion failed</b></span><br/>" +
                                 "Expected string: <span style='color:green'>" + expectedString+"</span><br/>" +
                                 "Actual   string: <span style='color:red'>" + actualString+"</span><br/>" +
-                                "The difference begins at\"<b>" + expectedString.Substring(diffIndex-1, 1)+"</b>\"";
+                                "The difference begins at \"<b>" + diffString+"</b>\"";
                 return output;
             }
             return message;
